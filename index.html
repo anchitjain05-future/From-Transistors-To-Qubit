@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="From Transistors to Qubits: A Hybrid Learning Framework for Understanding Quantum Computing through Semiconductor Concepts" />
+  <title>Transistors to Qubits | Hybrid Learning Framework</title>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- KaTeX Math Rendering (Local vendor with CDN fallback) -->
+  <link rel="stylesheet" href="vendor/katex/katex.min.css" id="katex-css" />
+  <script src="vendor/katex/katex.min.js"></script>
+  <script src="vendor/katex/auto-render.min.js"></script>
+  <script>
+    // Ensure KaTeX is loaded; fallback to CDN if vendor files are unavailable
+    (function() {
+      if (typeof katex === 'undefined') {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css';
+        document.head.appendChild(link);
+
+        var s1 = document.createElement('script');
+        s1.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js';
+        s1.onload = function() {
+          var s2 = document.createElement('script');
+          s2.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js';
+          s2.onload = function() {
+            if (window.renderAllMath) window.renderAllMath(document.body);
+          };
+          document.head.appendChild(s2);
+        };
+        document.head.appendChild(s1);
+      }
+    })();
+
+    // Global robust math rendering helper
+    window.renderAllMath = function(rootEl) {
+      var target = rootEl || document.body;
+      if (typeof renderMathInElement === 'function') {
+        try {
+          renderMathInElement(target, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '$', right: '$', display: false },
+              { left: '\\(', right: '\\)', display: false },
+              { left: '\\[', right: '\\]', display: true }
+            ],
+            throwOnError: false
+          });
+        } catch (e) {
+          console.warn('KaTeX render warning:', e);
+        }
+      }
+    };
+  </script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon (inline SVG as data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>" />
+</head>
+<body>
+  <!-- ========================================================
+       STICKY NAVIGATION BAR
+  ======================================================== -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <!-- Logo / Brand -->
+      <a href="#home" class="nav-logo" aria-label="Home">
+        <span class="logo-icon">⚛️</span>
+        <span class="logo-text">T<span class="logo-accent">→</span>Q</span>
+      </a>
+
+      <!-- Hamburger Menu Button (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="nav-links" role="list">
+        <li><a href="#home"       class="nav-link active" data-page="home">Home</a></li>
+        <li><a href="#mapping"    class="nav-link" data-page="mapping">Mapping</a></li>
+        <li class="nav-dropdown">
+          <a href="#level1" class="nav-link" data-page="level1">Levels ▾</a>
+          <ul class="dropdown-menu" role="list">
+            <li><a href="#level1" class="nav-link" data-page="level1">Level 1: Transistor</a></li>
+            <li><a href="#level2" class="nav-link" data-page="level2">Level 2: Logic Gates</a></li>
+            <li><a href="#level3" class="nav-link" data-page="level3">Level 3: Bit → Qubit</a></li>
+            <li><a href="#level4" class="nav-link" data-page="level4">Level 4: Circuits</a></li>
+          </ul>
+        </li>
+        <li><a href="#noise"      class="nav-link" data-page="noise">Noise &amp; Errors</a></li>
+        <li><a href="#simulator"  class="nav-link" data-page="simulator">Simulator Lab</a></li>
+        <li><a href="#assessment" class="nav-link" data-page="assessment">Assessment</a></li>
+        <li><a href="#about"      class="nav-link" data-page="about">About</a></li>
+      </ul>
+
+      <!-- Theme Toggle -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================================================
+       MAIN CONTENT — Single-Page App with hash routing
+       Each section is a "page" shown/hidden by JS router
+  ======================================================== -->
+  <main id="main-content">
+
+    <!-- HOME PAGE -->
+    <section id="home" class="page active" aria-label="Home page">
+      <!-- Content populated by js/home-mapping.js -->
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- MAPPING TABLE PAGE -->
+    <section id="mapping" class="page" aria-label="Concept mapping table">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- LEVEL 1: TRANSISTOR -->
+    <section id="level1" class="page" aria-label="Level 1: Transistor">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- LEVEL 2: LOGIC GATES -->
+    <section id="level2" class="page" aria-label="Level 2: Logic Gates">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- LEVEL 3: BIT → QUBIT -->
+    <section id="level3" class="page" aria-label="Level 3: Bit to Qubit">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- LEVEL 4: CLASSICAL vs QUANTUM CIRCUIT -->
+    <section id="level4" class="page" aria-label="Level 4: Classical vs Quantum Circuit">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- NOISE & ERRORS PAGE -->
+    <section id="noise" class="page" aria-label="Noise and Errors">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- SIMULATOR LAB PAGE -->
+    <section id="simulator" class="page" aria-label="Simulator Lab">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- ASSESSMENT PAGE -->
+    <section id="assessment" class="page" aria-label="Assessment">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <!-- ABOUT PAGE -->
+    <section id="about" class="page" aria-label="About">
+      <div class="page-loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       FOOTER
+  ======================================================== -->
+  <footer class="site-footer" id="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="logo-icon">⚛️</span>
+        <strong>From Transistors to Qubits</strong>
+      </div>
+      <p class="footer-tagline">A Hybrid Learning Framework for Quantum Computing Education</p>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#mapping">Mapping</a>
+        <a href="#simulator">Simulator</a>
+        <a href="#assessment">Assessment</a>
+        <a href="#about">About</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 &mdash; Educational Project. Built with HTML, CSS &amp; Vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       SCRIPTS — Supports direct double-click (file:// protocol)
+       and local web servers (http://)
+  ======================================================== -->
+  <script src="js/bundle.js"></script>
+  <script>
+    (function() {
+      // Ensure app and page sections initialize whether opened via file:// or http://
+      const initializers = [
+        ['initApp', typeof initApp === 'function' ? initApp : (window.initApp || null)],
+        ['initHomeMapping', typeof initHomeMapping === 'function' ? initHomeMapping : (window.initHomeMapping || null)],
+        ['initLevels12', typeof initLevels12 === 'function' ? initLevels12 : (window.initLevels12 || null)],
+        ['initLevels34', typeof initLevels34 === 'function' ? initLevels34 : (window.initLevels34 || null)],
+        ['initSimulator', typeof initSimulator === 'function' ? initSimulator : (window.initSimulator || null)],
+        ['initNoise', typeof initNoise === 'function' ? initNoise : (window.initNoise || null)],
+        ['initAssessment', typeof initAssessment === 'function' ? initAssessment : (window.initAssessment || null)],
+        ['initAbout', typeof initAbout === 'function' ? initAbout : (window.initAbout || null)]
+      ];
+
+      initializers.forEach(function(pair) {
+        var name = pair[0];
+        var fn = pair[1];
+        if (typeof fn === 'function') {
+          try {
+            fn();
+          } catch (err) {
+            console.error('Initialization error in ' + name + ':', err);
+          }
+        }
+      });
+
+      // Remove loading spinners once all sections have loaded
+      document.querySelectorAll('.page-loading').forEach(function(el) { el.remove(); });
+      
+      // Render all mathematical expressions across the entire page
+      if (typeof window.renderAllMath === 'function') {
+        window.renderAllMath(document.body);
+      }
+
+      console.log('🚀 Transistors to Qubits — Educational Framework Loaded');
+    })();
+  </script>
+</body>
+</html>
